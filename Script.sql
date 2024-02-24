@@ -733,6 +733,28 @@ group by titulo, id_pelicula, cantidad
 order by cantidad - count(*) desc) consulta_stock
 where consulta_stock.disponibles > 0 ;
 
+-------------- Qué socio tiene n numero de ----------------
+--select titulo, disponibles
+--from (
+select id_pelicula, numero_copias, id_prestamo, id_socio 
+from 
+copia_por_pelicula cpp
+inner join
+prestamo 
+using(id_copia)
+left join
+pelicula p 
+using(id_pelicula)
+where fecha_devolucion is null 
+and id_pelicula =1 ;
+--group by titulo, id_pelicula, cantidad
+--order by cantidad - count(*) desc) consulta_stock;
+
+/*
+ El socio 17 tiene la copia 4 de la pelicula 1 registrada en el préstamo 54.
+ */
+
+
 ----------- mejores socios --------------
 select nombre, apellidos, count(*) n_prestamos
 from prestamo 
